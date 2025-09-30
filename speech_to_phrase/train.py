@@ -1,9 +1,12 @@
 """Model training."""
 
+import argparse
+import asyncio
 import hashlib
 import json
 import logging
 from dataclasses import asdict, dataclass
+from pathlib import Path
 
 from hassil import Intents, merge_dict
 
@@ -12,7 +15,7 @@ from .g2p import LexiconDatabase
 from .hass_api import Things
 from .hassil_fst import Fst, G2PInfo, intents_to_fst
 from .lang_sentences import LanguageData, load_shared_lists
-from .models import Model, ModelType, download_model
+from .models import MODELS, Model, ModelType, download_model
 from .train_coqui_stt import train_coqui_stt
 from .train_kaldi import train_kaldi
 from .util import quote_strings, yaml, yaml_output
@@ -215,3 +218,62 @@ def _get_sentences_hash(
                 hasher.update(chunk)
 
     return hasher.hexdigest()
+
+
+# -----------------------------------------------------------------------------
+
+
+async def main() -> None:
+    """Main entry point."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--model", required=True, help="Id of speech model (e.g., en_US-rhasspy)"
+    )
+    parser.add_argument(
+        "--sentences",
+        required=True,
+        action="append",
+        help="Path to sentences YAML file",
+    )
+    parser.add_argument(
+        "--train-dir", required=True, help="Directory to write trained model files"
+    )
+    parser.add_argument(
+        "--tools-dir", required=True, help="Directory with kaldi, openfst, etc."
+    )
+    parser.add_argument(
+        "--models-dir", required=True, help="Directory with speech models"
+    )
+    parser.add_argument("--debug", action="store_true", help="Log DEBUG messages")
+    args = parser.parse_args()
+
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
+    _LOGGER.debug(args)
+
+    model = next(iter(m for m in MODELS.values() if m.id == args.model), None)
+    assert model is not None, f"Unknown model id: {args.model}"
+
+    settings = Settings(
+        models_dir=Path(args.models_dir),
+        train_dir=Path(args.train_dir),
+        tools_dir=Path(args.tools_dir),
+        custom_sentences_dirs=[],
+        hass_token="",
+        hass_websocket_uri="",
+        retrain_on_connect=False,
+    )
+
+    intents = Intents.from_files(args.sentences)
+
+    if model.type == ModelType.KALDI:
+        lexicon = LexiconDatabase(settings.models_dir / model.id / "lexicon.db")
+        fst = _create_intents_fst(model, lexicon, intents)
+        await train_kaldi(model, settings, lexicon, fst)
+    else:
+        raise TrainingError(f"Unexpected model type for {model.id}: {model.type}")
+
+    _LOGGER.info("Trained %s", settings.train_dir)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
