@@ -1,0 +1,162 @@
+---
+language: "sk"
+#translated by misko903
+lists:
+   color
+     - "biel(y|a|e)"
+     - "čiern(y|a|e)"
+     - "červen(ý|a|e)"
+     - "oranžov(ý|a|e)"
+     - "žlt(ý|a|e)"
+     - "zelen(ý|a|e)"
+     - "modr(ý|a|e)"
+     - "fialov(ý|a|e)"
+     - "hned(ý|a|e)"
+     - "ružov(ý|a|e)"
+     - "tyrkysov(ý|a|e)"
+
+expansion_rules:
+  timer_set: "spusti|nastav|spustiť|nastaviť"
+  timer_cancel: "ukonči|ukončiť|zastav|zastaviť"
+
+wildcards:
+  - "todo_item"
+
+data:
+  # cancel
+  - "[to] (nevadí|nerieš)"
+  - "(zabudni|kašli|ser|vykašli) na to"
+
+  # date and time
+  - "koľko je hodín"
+  - "aký je [dnes] dátum"
+
+  # weather
+  - "aké je počasie"
+   - sentences:
+       - "aké je {name} počasie"
+       - "aké je počasie (v|na) {name}"
+    domains:
+       - "weather"
+
+  # lights (area)
+  - "(za|vy)pni [tu|tieto] svetlá"
+  #- "turn [the] lights (on|off) [in here]"
+  - "(za|vy)pni [všetky|tieto] {area} svetlá"
+  - "(za|vy)pni [všetky|tieto] svetlá (v|na) {area}"
+  - "nastav[iť] [tu] jas na {brightness} percent"
+  - "nastav[iť] jas (v|na) {area} na {brightness} percent"
+  - "nastav[iť] {area} jas na {brightness} percent"
+  - "nastav[iť] [tieto] svetlá [tu] na {color}"
+  - "nastav[iť] [farbu] [týchto] svetiel [tu] na {color}"
+  - "nastav[iť] [farbu] {area} [týchto] svetiel [tu] na {color}"
+  - "nastav[iť] {area} [tieto] svetlá na {color}"
+  - "nastav[iť] svetlá (v|na) {area} na {color}"
+
+  # lights (name)
+  - sentences:
+      - "(zapn|vypn)(i|úť) svetlo {name}"
+    domains:
+      - "lights"
+  - sentences:
+      - "nastav[iť] brightness {name} na {brightness} percent"
+      - "nastav[iť] {name} jas na {brightness} percent"
+    domains:
+      - "lights"
+    light_supports_brightness: true
+
+  - sentences:
+      - "nastav[iť] [farbu] {name} na {color}"
+      - "nastav[iť] {name} [farbu] na {color}"
+    domains:
+      - "light"
+    light_supports_color: true
+
+  # doors and windows
+  - "(otvor[iť]|zatvor[iť]) (rolety|závesy|žalúzie|okná) (v|na) {area}"
+  - "(otvor[iť]|zatvor[iť]) {area} (rolety|závesy|žalúzie|okná)"
+  - sentences:
+      - "(otvor[iť]|zatvor[iť]) {name}"
+      - "(otvor[iť]|zatvor[iť]) {name} (v|na) {area}"
+      - "je {name} (otvoren(ý|á|é)|zatvor(ý|á|é))"
+    domains:
+      - "cover"
+
+  # locks
+  - sentences:
+      - "(odomkn|zamkn)(i|úť) {name}"
+      - "[je] {name} (odomknut|zamknut)(ý|á|é)"
+    domains:
+      - "lock"
+
+  # generic on/off
+  - sentences:
+      - "(zapn|vypn)(i|úť) {name}"
+      - "(zapn|vypn)(i|úť) {name} (v|na) {area}"
+      - "(v|na) {area} (zapn|vypn)(i|úť) {name}"
+    domains:
+      - "light"
+      - "switch"
+      - "fan"
+      - "media_player"
+      - "input_boolean"
+
+  # scripts and scenes
+  - sentences:
+      - "spus(ti|ť) {name} [skript]"
+    domains:
+      - "script"
+
+  - sentences:
+      - "aktiv(ovať|uj) scénu {name}"
+    domains:
+      - "scene"
+
+  # timers
+  - "(nastav(iť)|spusti(ť)|vytvor(iť)) časovač na {seconds} sekúnd"
+  #- "(set|start|create) [a] timer for 1 minute"
+  #- "(set|start|create) [a] timer for {minutes} minutes"
+  #- "(set|start|create) [a] timer for 1 minute and {seconds} seconds"
+  #- "(set|start|create) [a] timer for {minutes} minutes and {seconds} seconds"
+  #- "(set|start|create) [a] timer for {minutes} and a half minutes"
+  #- "(set|start|create) [a] timer for 1 hour"
+  #- "(set|start|create) [a] timer for {hours} hours"
+  #- "(set|start|create) [a] timer for {hours} and a half hours"
+  #- "(set|start|create) [a] timer for 1 hour and 1 minute"
+  #- "(set|start|create) [a] timer for 1 hour and {minutes} minutes"
+  #- "(set|start|create) [a] timer for {hours} hours and {minutes} minutes"
+
+  # - "(cancel|stop) [the|my] timer"
+  # - "(cancel|stop) all [[of ](the|my)] timers"
+  # - "(pause|resume) [the|my] timer"
+  # - "timer status"
+  # - "status of [the|my] timer[s]"
+  # - "[how much] time [is] left on [the|my] timer[s]"
+
+  # media
+  - "(pauza|pokrač(ovať|uj))"
+  - "ďalš(ia|ie|iu) [(skladbu|stopu|položku|pesničku)]"
+  - "skip [[this ](track|song)]"
+  - sentences:
+  #     - "(pause|resume) [the] {name}"
+  #     - "next [(track|item)] on [the] {name}"
+  #     - "skip [[the ](track|song)] on [the] {name}"
+  #   domains:
+  #     - "media_player"
+
+  # # temperature
+  # - "(what is|what's) the (temp|temperature)"
+  # - "(what is|what's) the (temp|temperature) in [the] {area}"
+  # - "(what is|what's) the {area} (temp|temperature)"
+  # - sentences:
+  #     - "(what is|what's) the {name} (temp|temperature)"
+  #     - "(what is|what's) the (temp|temperature) of [the] {name}"
+  #   domains:
+  #     - "climate"
+
+  # sensors
+  - sentences:
+      - "ak(ý|á|é) je [hodnota] {name}"
+      - "koľk(ý|á|é) je [hodnota] {name}"
+    domains:
+      - "sensor"
