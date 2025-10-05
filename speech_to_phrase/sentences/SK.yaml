@@ -113,46 +113,46 @@ data:
       - "scene"
 
   # timers
-  - "(nastav(iť)|spusti(ť)|vytvor(iť)) časovač na {seconds} sekúnd"
-  #- "(set|start|create) [a] timer for 1 minute"
-  #- "(set|start|create) [a] timer for {minutes} minutes"
-  #- "(set|start|create) [a] timer for 1 minute and {seconds} seconds"
-  #- "(set|start|create) [a] timer for {minutes} minutes and {seconds} seconds"
-  #- "(set|start|create) [a] timer for {minutes} and a half minutes"
-  #- "(set|start|create) [a] timer for 1 hour"
-  #- "(set|start|create) [a] timer for {hours} hours"
-  #- "(set|start|create) [a] timer for {hours} and a half hours"
-  #- "(set|start|create) [a] timer for 1 hour and 1 minute"
-  #- "(set|start|create) [a] timer for 1 hour and {minutes} minutes"
-  #- "(set|start|create) [a] timer for {hours} hours and {minutes} minutes"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {seconds} sekúnd"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na 1 minútu"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {minutes} minúty"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) 1 minútu a {seconds} sek(únd|undy)"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {minutes} minúty a {seconds} sek(únd|undy)"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na  {minutes} pol minúty"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na 1 hodinu"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {hours} hodín"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {hours} a pol hodiny"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na 1 hodinu a 1 minútu"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na 1 hodinu a {minutes} minút[y]"
+  - "(nastav[iť])|spusti[ť]|vytvor[iť]) časovač na {hours} hod(iny|ín) a {minutes} minút[y]"
 
-  # - "(cancel|stop) [the|my] timer"
-  # - "(cancel|stop) all [[of ](the|my)] timers"
-  # - "(pause|resume) [the|my] timer"
-  # - "timer status"
-  # - "status of [the|my] timer[s]"
-  # - "[how much] time [is] left on [the|my] timer[s]"
+  - "(zruš|zastav|stopni|odstráň) [môj] časovač"
+  - "(zruš|zastav|stopni|odstráň) všetky [môj|moje] časovač[e]"
+  - "(pauza|pokrač(ovať|uj)) [v] [m(ojom|ôj] časovač[i|och]"
+  - "stav časovača"
+  - "stav [môj(ho|ich)] časovač(a|ov)"
+  - "[koľko (z)ostáva] čas[u] na [mojom] časovač(i|och)"
 
   # media
   - "(pauza|pokrač(ovať|uj))"
   - "ďalš(ia|ie|iu) [(skladbu|stopu|položku|pesničku)]"
-  - "skip [[this ](track|song)]"
+  - "preskoč [[tento|túto ](skladbu|stopu|položku|pesničku)]"
   - sentences:
-  #     - "(pause|resume) [the] {name}"
-  #     - "next [(track|item)] on [the] {name}"
-  #     - "skip [[the ](track|song)] on [the] {name}"
-  #   domains:
-  #     - "media_player"
+       - "(pauza|pokrač(ovať|uj)) [v] {name}"
+       - "ďalš(ia|ie|iu) [(skladbu|stopu|položku|pesničku)] na {name}"
+       - "preskoč [[tento|túto ](skladbu|stopu|položku|pesničku)] na {name}"
+    domains:
+      - "media_player"
 
-  # # temperature
-  # - "(what is|what's) the (temp|temperature)"
-  # - "(what is|what's) the (temp|temperature) in [the] {area}"
-  # - "(what is|what's) the {area} (temp|temperature)"
-  # - sentences:
-  #     - "(what is|what's) the {name} (temp|temperature)"
-  #     - "(what is|what's) the (temp|temperature) of [the] {name}"
-  #   domains:
-  #     - "climate"
+  # temperature
+  - "aká [je] teplota"
+  - "aká [je] teplota (v|na) {area}"
+  - "aká [je] {area} teplota"
+  - sentences:
+      - "aká [je] {name} teplota"
+      - "aká [je] teplota {name}"
+    domains:
+       - "climate"
 
   # sensors
   - sentences:
