@@ -1,0 +1,54 @@
+---
+language: "sk"
+
+fixtures:
+  areas:
+    - name:
+        - "kuchyňa"
+        - "kuchyni"
+    - name:
+        - "obývačka"
+        - "obývačke"
+
+  entities:
+    - name:
+        - "lampa"
+        - "lampu"
+        - "lampy"
+      domain: "light"
+      light_supports_brightness: true
+      light_supports_color: true
+
+    - name:
+        - "Bratislava"
+        - "Bratislave"
+      domain: "weather"
+
+    - name:
+        - "termostat"
+        - "termostate"
+      domain: "climate"
+
+    - name:
+        - "vonkajšia vlhkosť"
+        - "vonkajšej vlhkosti"
+      domain: "sensor"
+
+    - name:
+        - "televízor"
+        - "televízore"
+        - "televízora"
+      domain: "media_player"
+
+    - name:
+        - "nočný režim"
+      domain: "script"
+
+    - name:
+        - "večerná scéna"
+      domain: "scene"
+
+    - name:
+        - "ventilátor"
+        - "ventilátore"
+      domain: "fan"
